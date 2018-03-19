@@ -1,8 +1,51 @@
-label {
-    cursor: pointer;
+body{
+    background-color: #000000;
+    color: #00FF00;
+    font-family: "Arial";
+}
+
+
+.container {
+    width: 900px;
+    height: 700px;
+    margin: auto;
+}
+
+.header {
+    height: 100px;
+    text-align: center;
+}
+
+.content{
+    height: 550px;
+}
+
+.contentLeft{
+    width: 50%;
+    float: left;
+}
+
+.contentRight{
+    width: 50%;
+    float: right;
+}
+
+.footer {
+    height: 50px;
+    text-align: center;
 }
 
 textarea {
-    width: 100px;
-    height: 150px;
+    width: 350px;
+    height: 250px;
+    background-color: #000000;
+    color: #00FF00;
+    resize: none;
+}
+
+button{
+    background-color: black;
+    color: #00FF00;
+    width: 85px;
+    height: 25px;
 }
