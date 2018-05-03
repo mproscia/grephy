@@ -15,20 +15,25 @@
 
 <div class="container">
     <div class="header">
-        <img src="dist/images/grephylogo.png" height="75%">
+        <a href="index.html"><img src="dist/images/grephylogo.png" height="75%"> </a>
 
     </div>
 
     <div class="content">
         <div class="contentLeft">
+            <h3> Define Regex:</h3>
+            <br>
+            <input type="text" id="regexTA">
+            <br>
             <h3> Select a File to Upload: </h3>
             <br>
             <input type="file" id="fileToLoad">
             <br> <br> <br>
-            <button onclick="loadFileAsText()"> Load</button>
+            <button onclick="loadFileAsText()"> Match </button>
         </div>
 
         <div class="contentRight">
+            <h3> Accepted Strings: </h3>
             <textarea readonly id="content-target"></textarea>
         </div>
 
