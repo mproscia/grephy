@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>mProscia Grephy</title>
     <link rel="stylesheet" href="source/styles/grephy.css">
-    <script type="text/javascript" src="dist/scripts/readFile.js"></script>
 </head>
 <body>
 
@@ -29,7 +28,7 @@
             <br>
             <input type="file" id="fileToLoad">
             <br> <br> <br>
-            <button onclick="loadFileAsText()"> Match </button>
+            <button onclick="grephy.Consume.consumeInput()"> Match </button>
         </div>
 
         <div class="contentRight">
@@ -46,6 +45,13 @@
     </div>
 
 </div>
+
+<script type="text/javascript" src="source/scripts/readFile.js"></script>
+<script type="text/javascript" src="source/scripts/match.js"></script>
+<script type="text/javascript" src="source/scripts/utils.js"></script>
+<script type="text/javascript" src="source/scripts/consume.js"></script>
+<script type="text/javascript" src="source/scripts/global.js"></script>
+
 
 
 </body>

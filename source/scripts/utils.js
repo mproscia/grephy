@@ -1,9 +1,10 @@
-module grephy {
-    export class Utils{
+var grephy;
+(function (grephy) {
+    var Utils = /** @class */ (function () {
+        function Utils() {
+        }
         // put Utility functions here
-
-        public static trim(str)      // Use a regular expression to remove leading and trailing spaces. // from my compilers project
-        {
+        Utils.trim = function (str) {
             return str.replace(/^\s+ | \s+$/g, "");
             /*
             Huh?  Take a breath.  Here we go:
@@ -13,8 +14,8 @@ module grephy {
             - "g" makes is global, so we get all the whitespace.
             - "" is nothing, which is what we replace the whitespace with.
             */
-
-        }
-
-    }
-}
+        };
+        return Utils;
+    }());
+    grephy.Utils = Utils;
+})(grephy || (grephy = {}));

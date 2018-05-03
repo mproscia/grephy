@@ -1,11 +1,20 @@
-function loadFileAsText(){
-    var fileToLoad = document.getElementById("fileToLoad").files[0];
+module grephy{
 
-    var fileReader = new FileReader();
-    fileReader.onload = function(fileLoadedEvent){
-        var textFromFileLoaded = fileLoadedEvent.target.result;
-        document.getElementById("content-target").value = textFromFileLoaded;
-    };
+    export class ReadFile{
 
-    fileReader.readAsText(fileToLoad, "UTF-8");
+        public static loadFileAsText(){
+            var fileToLoad = document.getElementById("fileToLoad").files[0];
+
+            var fileReader = new FileReader();
+            fileReader.onload = function(fileLoadedEvent){
+                var textFromFileLoaded = (fileLoadedEvent.target.result).toString();
+                return textFromFileLoaded;
+            };
+
+            fileReader.readAsText(fileToLoad, "UTF-8");
+        }
+
+    }
+
 }
+
