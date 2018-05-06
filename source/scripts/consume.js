@@ -50,6 +50,9 @@ var grephy;
             }
             //TODO: capability to read more than one line
         };
+        Consume.reload = function () {
+            window.location.reload();
+        };
         return Consume;
     }());
     grephy.Consume = Consume;

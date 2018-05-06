@@ -50,3 +50,7 @@ button{
     width: 85px;
     height: 25px;
 }
+
+button:disabled {
+    opacity: 0.3;
+}

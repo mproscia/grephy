@@ -66,6 +66,10 @@ module grephy {
             //TODO: capability to read more than one line
         }
 
+        public static reload(){
+            window.location.reload();
+        }
+
 
 
     }
