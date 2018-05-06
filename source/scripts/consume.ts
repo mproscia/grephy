@@ -7,24 +7,21 @@ module grephy {
         }
 
         public static consumeInput(){
-            this.getInput();
-            grephy.Match.matchTokens();
+            this.verifyInput();
+            if(matched == true){
+                grephy.Match.matchTokens();
+            } else {
+                (<HTMLInputElement>document.getElementById("content-target")).value = "Input does NOT Match Regex";
+
+            }
         }
 
-        public static getInput(){
-            var inputStr = (grephy.ReadFile.loadFileAsText());
-            //store input into global array
-
-            for (var i = 0; i < inputStr.length; i++)
-
-            console.log("input" + input);
-            // break lines up
-            //TODO: capability to read more than one line
-
+        public static verifyInput(){
+           this.getRegex();
 
         }
 
-        public getRegex(){
+        public static getRegex(){
             var regex = (<HTMLInputElement>document.getElementById("regexTA")).value;
 
             // get rid of special characters for terms of matching
@@ -37,7 +34,39 @@ module grephy {
             }
 
             console.log("accept" + acceptedChar);
+
         }
+
+        public static readFile(){
+            var fileToLoad = (<HTMLInputElement>document.getElementById("fileToLoad")).files[0];
+            if(fileToLoad == null){
+                (<HTMLInputElement>document.getElementById("content-target")).value = "File Load Failed - Try Again.";
+
+            } else {
+                (<HTMLInputElement>document.getElementById("content-target")).value = " ";
+
+                var fileReader = new FileReader();
+                fileReader.onload = function(fileLoadedEvent){
+                    textFromFileLoaded = (fileLoadedEvent.target.result).toString();
+                    inputLength = textFromFileLoaded.length;
+                    input = textFromFileLoaded.split("");
+                    console.log("input" + input);
+                };
+
+                fileReader.readAsText(fileToLoad, "UTF-8");
+                (<HTMLInputElement>document.getElementById("readButton")).disabled = true;
+                (<HTMLInputElement>document.getElementById("matchButton")).disabled = false;
+
+            }
+
+
+
+
+
+            //TODO: capability to read more than one line
+        }
+
+
 
     }
 

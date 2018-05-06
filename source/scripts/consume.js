@@ -7,18 +7,18 @@ var grephy;
             // clear everything & all variables
         };
         Consume.consumeInput = function () {
-            this.getInput();
-            grephy.Match.matchTokens();
+            this.verifyInput();
+            if (matched == true) {
+                grephy.Match.matchTokens();
+            }
+            else {
+                document.getElementById("content-target").value = "Input does NOT Match Regex";
+            }
         };
-        Consume.getInput = function () {
-            var inputStr = (grephy.ReadFile.loadFileAsText());
-            //store input into global array
-            for (var i = 0; i < inputStr.length; i++)
-                console.log("input" + input);
-            // break lines up
-            //TODO: capability to read more than one line
+        Consume.verifyInput = function () {
+            this.getRegex();
         };
-        Consume.prototype.getRegex = function () {
+        Consume.getRegex = function () {
             var regex = document.getElementById("regexTA").value;
             // get rid of special characters for terms of matching
             for (var i = 0; i < regex.length; i++) {
@@ -29,6 +29,26 @@ var grephy;
                 }
             }
             console.log("accept" + acceptedChar);
+        };
+        Consume.readFile = function () {
+            var fileToLoad = document.getElementById("fileToLoad").files[0];
+            if (fileToLoad == null) {
+                document.getElementById("content-target").value = "File Load Failed - Try Again.";
+            }
+            else {
+                document.getElementById("content-target").value = " ";
+                var fileReader = new FileReader();
+                fileReader.onload = function (fileLoadedEvent) {
+                    textFromFileLoaded = (fileLoadedEvent.target.result).toString();
+                    inputLength = textFromFileLoaded.length;
+                    input = textFromFileLoaded.split("");
+                    console.log("input" + input);
+                };
+                fileReader.readAsText(fileToLoad, "UTF-8");
+                document.getElementById("readButton").disabled = true;
+                document.getElementById("matchButton").disabled = false;
+            }
+            //TODO: capability to read more than one line
         };
         return Consume;
     }());
