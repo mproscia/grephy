@@ -38,10 +38,11 @@ body{
 
 textarea {
     width: 350px;
-    height: 250px;
+    height: 100px;
     background-color: #000000;
     color: #00FF00;
     resize: none;
+    overflow-y: scroll;
 }
 
 button{
