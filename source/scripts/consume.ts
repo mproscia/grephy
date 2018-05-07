@@ -103,13 +103,13 @@ module grephy {
         }
 
         public static putMessage(msg){
-            (<HTMLInputElement>document.getElementById("content-target")).value += msg + "\n";
+            (<HTMLInputElement>document.getElementById("logTA")).value += msg + "\n";
 
         }
 
         public static reload(){
             msg = " ";
-            (<HTMLInputElement>document.getElementById("content-target")).value = msg;
+            (<HTMLInputElement>document.getElementById("logTA")).value = msg;
             window.location.reload();
         }
     }

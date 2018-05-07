@@ -45,10 +45,14 @@ textarea {
     overflow-y: scroll;
 }
 
+#dotOutputTA {
+    height: 200px;
+}
+
 button{
     background-color: black;
     color: #00FF00;
-    width: 85px;
+    width: 125px;
     height: 25px;
 }
 

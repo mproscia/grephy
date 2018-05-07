@@ -36,7 +36,15 @@
 
         <div class="contentRight">
             <h3 style="text-align:left"> Log: </h3>
-            <textarea readonly id="content-target"></textarea>
+            <textarea readonly id="logTA"></textarea>
+            <br>
+            <h3 style="text-align:left"> DOT Output: </h3>
+            <textarea readonly id="dotOutputTA"></textarea>
+            <button onclick="grephy.CreateDFAFile.createFile()"> Create DOT File </button>
+            <button onclick="#" disabled> Display DFA </button>
+
+
+
         </div>
 
 
@@ -51,6 +59,7 @@
 
 <script type="text/javascript" src="source/scripts/match.js"></script>
 <script type="text/javascript" src="source/scripts/createDFA.js"></script>
+<script type="text/javascript" src="source/scripts/createDFAFile.js"></script>
 <script type="text/javascript" src="source/scripts/consume.js"></script>
 <script type="text/javascript" src="source/scripts/global.js"></script>
 

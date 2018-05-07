@@ -87,11 +87,11 @@ var grephy;
             }
         };
         Consume.putMessage = function (msg) {
-            document.getElementById("content-target").value += msg + "\n";
+            document.getElementById("logTA").value += msg + "\n";
         };
         Consume.reload = function () {
             msg = " ";
-            document.getElementById("content-target").value = msg;
+            document.getElementById("logTA").value = msg;
             window.location.reload();
         };
         return Consume;
