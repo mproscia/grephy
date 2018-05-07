@@ -198,7 +198,7 @@ module grephy{
             if (error > 0){
                 _Consume.putMessage("DFA Not Displayed Due to Errors");
             } else {
-                // Display DFA
+                CreateDFAFile.createOutput();
             }
         }
 

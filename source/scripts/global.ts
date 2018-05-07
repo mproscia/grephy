@@ -11,14 +11,6 @@ var textFromFileLoaded = "";
 var inputLength = 0;
 var tokenCount = 0;
 var regex;
-var regexArr = [];
-var isUnion = false;
-var kleene = false;
-var emptyAllowed = false;
-var kleeneToken = "";
-var stringToMatch = "";
-var strings = [];
-var creatingString = false;
 
 var curTransitionStates = [];
 var transitionSymbols = [];

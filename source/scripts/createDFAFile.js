@@ -3,18 +3,27 @@ var grephy;
     var CreateDFAFile = /** @class */ (function () {
         function CreateDFAFile() {
         }
-        CreateDFAFile.createFile = function () {
-            dotString = "test code";
-            this.writeToFile();
+        CreateDFAFile.createOutput = function () {
+            dotString = "";
+            dotString += "digraph graph {";
+            this.newLine();
+            dotString += "node [style=filled, color-white];";
+            this.newLine();
+            dotString += "start -> q" + startState + ";";
+            this.newLine();
+            for (var i = 0; i < curTransitionStates.length; i++) {
+                dotString += "q" + curTransitionStates[i] + " -> q" + newTransitionStates[i] + ";";
+                this.newLine();
+            }
+            for (var j = 0; j < acceptStates.length; j++) {
+                dotString += "q" + acceptStates[j] + " [shape = doublecircle];";
+                this.newLine();
+            }
+            dotString += "}";
+            document.getElementById("dotOutputTA").value = dotString;
         };
         CreateDFAFile.writeToFile = function () {
             var str = dotString;
-            var textChars = atob(str);
-            var textNums = new Array(textChars.length);
-            for (var i = 0; i < textChars.length; i++) {
-                textNums[i] = textChars.charCodeAt(i);
-            }
-            var textArray = new Uint8Array(textNums);
             var data = new Blob([str], { type: "text/plain;charset=utf-8" });
             this.saveAs(data, "newDFA.txt");
         };
@@ -32,6 +41,9 @@ var grephy;
             setTimeout(function () {
                 window.URL.revokeObjectURL(url);
             }, 1000);
+        };
+        CreateDFAFile.newLine = function () {
+            dotString += "\n";
         };
         return CreateDFAFile;
     }());

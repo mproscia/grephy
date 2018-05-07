@@ -196,7 +196,7 @@ var grephy;
                 _Consume.putMessage("DFA Not Displayed Due to Errors");
             }
             else {
-                // Display DFA
+                grephy.CreateDFAFile.createOutput();
             }
         };
         return CreateDFA;
