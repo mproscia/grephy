@@ -3,14 +3,21 @@ CMPT 440 - Formal Languages &amp; Computability Final Project
 
 ---------------------------------------
 
-Created file structure to use TypeScript, but still working on actual implementation. I may stick to strictly JavaScript, but also have been successful with TypeScript in other projects so I'd like to try it. If I use TypeScript, I will compile it to JavaScript.
-The project can be run from the index.html file.
+To Search File:
+1. Upload File & Read
+2. Declare Regex to Match to
+3. Select Match
+4. If any of the strings inputted match, a DFA will be output in DOT Language. If all strings fail, NO DFA will be output.
 
-Still have to verify that i'll be using Javascript or if I'll be switching to Java.
+To Save DOT File:
+1. After a successful DFA Creation, select Create DOT File.
+2. Save DOT File as necessary.
 
 ---------------------------------------
-TODO:
-- Better understand grep utility
-- work on accepting and denying input files based on alphabet
-- add functionality to input function
-- restructure UI a little to make it more versatile for grephy functionality
+Test Cases:
+- All Test Cases can be run against the Regex 'aab'.
+multipleLineMatch.txt
+negativeMatch.txt
+simpleMatch.txt
+
+---------------------------------------
