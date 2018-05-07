@@ -11,6 +11,7 @@ var doneMatching = false;
 var input = [];
 var textFromFileLoaded = "";
 var inputLength = 0;
+var tokenCount = 0;
 var acceptedAlpha = [];
 var regex;
 var string = false;
@@ -20,6 +21,10 @@ var isUnion = false;
 var kleene = false;
 var emptyAllowed = false;
 var kleeneToken = "";
+var error = 0;
+var stringToMatch = "";
+var strings = [];
+var creatingString = false;
 
 
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w","x", "y", "z"];

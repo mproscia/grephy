@@ -6,9 +6,19 @@ var grephy;
         Match.init = function () {
             // reset matching variables
         };
+        Match.setUpRegexString = function () {
+            var i = 0;
+            while (creatingString == true) {
+                this.matchRegexTokens(regexArr[i]);
+                i++;
+            }
+            this.findMatches();
+        };
         Match.findMatches = function () {
             doneMatching = false;
             while (doneMatching == false) {
+                this.consumeToken(input[tokenCount]);
+                this.increaseToken();
                 // check for + first
                 for (var i = 0; i < regex.length; i++) {
                     if (regexArr[i] == "+") {
@@ -17,21 +27,6 @@ var grephy;
                     }
                 }
                 // check for *
-                for (var i = 0; i < regex.length; i++) {
-                    if (regexArr[i] == "*") {
-                        kleene = true;
-                        emptyAllowed = true;
-                        if (regexArr[i - 1] == ")") {
-                            kleeneToken = regexArr[i - 2];
-                        }
-                        else {
-                            kleeneToken = regexArr[i - 1];
-                        }
-                    }
-                    console.log(kleeneToken);
-                    // check for kleenetoken
-                    this.searchKleeneToken();
-                }
                 // check for parenthesis
             }
         };
@@ -51,6 +46,7 @@ var grephy;
                                 }
                                 if (testLength == tokenLength) {
                                     doneMatching = true;
+                                    this.endMatching();
                                     console.log("Match found");
                                 }
                                 else {
@@ -60,10 +56,112 @@ var grephy;
                             }
                             else {
                                 doneMatching = true;
+                                this.endMatching();
                                 console.log("Match found");
                             }
                         }
                     }
+                }
+            }
+        };
+        Match.matchRegexTokens = function (expr) {
+            switch (expr) {
+                case "+":
+                    strings.push(stringToMatch);
+                    stringToMatch = "";
+                    break;
+                case "*":
+                    break;
+                case "(":
+                    break;
+                case ")":
+                    break;
+                case "a":
+                case "b":
+                case "c":
+                case "d":
+                case "e":
+                case "f":
+                case "g":
+                case "h":
+                case "i":
+                case "j":
+                case "k":
+                case "l":
+                case "m":
+                case "n":
+                case "o":
+                case "p":
+                case "q":
+                case "r":
+                case "s":
+                case "t":
+                case "u":
+                case "v":
+                case "w":
+                case "x":
+                case "y":
+                case "z":
+                case "0":
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                    stringToMatch += expr;
+                    break;
+            }
+        };
+        Match.consumeToken = function (token) {
+            //TODO: COME BACK TO
+            switch (token) {
+                case "(":
+                    break;
+                case "+":
+                    break;
+                case ")":
+                    break;
+                case "*":
+                    this.findKleeneStar();
+                    break;
+                default:
+                    break;
+            }
+        };
+        Match.findKleeneStar = function () {
+            for (var i = 0; i < regex.length; i++) {
+                if (regexArr[i] == "*") {
+                    kleene = true;
+                    emptyAllowed = true;
+                    if (regexArr[i - 1] == ")") {
+                        kleeneToken = regexArr[i - 2];
+                    }
+                    else {
+                        kleeneToken = regexArr[i - 1];
+                    }
+                }
+                console.log(kleeneToken);
+                // check for kleenetoken
+                this.searchKleeneToken();
+            }
+        };
+        Match.increaseToken = function () {
+            if (tokenCount < input.length)
+                tokenCount++;
+        };
+        Match.endMatching = function () {
+            if (doneMatching == true) {
+                if (tokenCount < input.length + 1) {
+                    doneMatching = false;
+                    this.increaseToken();
+                }
+                else {
+                    // check for errors
+                    // if error print otherwise craete DFA
                 }
             }
         };
