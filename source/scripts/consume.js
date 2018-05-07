@@ -8,6 +8,7 @@ var grephy;
         };
         Consume.consumeInput = function () {
             regex = document.getElementById("regexTA").value;
+            acceptCount = 0;
             if (regex == "") {
                 this.putMessage("Please enter a Regex and Try Again");
             }
@@ -18,6 +19,7 @@ var grephy;
             }
         };
         Consume.readFile = function () {
+            this.reloadLog();
             var fileToLoad = document.getElementById("fileToLoad").files[0];
             if (fileToLoad == null) {
                 this.putMessage("File Load Failed - Try Again.");
@@ -66,6 +68,10 @@ var grephy;
             msg = " ";
             document.getElementById("logTA").value = msg;
             window.location.reload();
+        };
+        Consume.reloadLog = function () {
+            document.getElementById("logTA").value = " ";
+            document.getElementById("dotOutputTA").value = " ";
         };
         return Consume;
     }());

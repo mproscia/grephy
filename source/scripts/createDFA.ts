@@ -13,10 +13,11 @@ module grephy{
             curStartSymbol = "";
             acceptStates = [];
             isString = false;
+            tokenCount = 0;
         }
 
         public static scanRegex(){
-            // this.init();
+            this.init();
             while(tokenCount < regex.length){
                 if(tokenCount == regex.length -1 ){
                     this.consumeLastToken(regex.charAt(tokenCount));

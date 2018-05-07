@@ -15,9 +15,10 @@ var grephy;
             curStartSymbol = "";
             acceptStates = [];
             isString = false;
+            tokenCount = 0;
         };
         CreateDFA.scanRegex = function () {
-            // this.init();
+            this.init();
             while (tokenCount < regex.length) {
                 if (tokenCount == regex.length - 1) {
                     this.consumeLastToken(regex.charAt(tokenCount));

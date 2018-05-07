@@ -8,6 +8,7 @@ module grephy {
 
         public static consumeInput(){
             regex = (<HTMLInputElement>document.getElementById("regexTA")).value;
+            acceptCount = 0;
 
             if(regex == ""){
                 this.putMessage("Please enter a Regex and Try Again");
@@ -20,6 +21,7 @@ module grephy {
 
 
         public static readFile(){
+            this.reloadLog();
             var fileToLoad = (<HTMLInputElement>document.getElementById("fileToLoad")).files[0];
             if(fileToLoad == null){
                 this.putMessage("File Load Failed - Try Again.");
@@ -81,6 +83,13 @@ module grephy {
             msg = " ";
             (<HTMLInputElement>document.getElementById("logTA")).value = msg;
             window.location.reload();
+        }
+
+        public static reloadLog(){
+            (<HTMLInputElement>document.getElementById("logTA")).value = " ";
+            (<HTMLInputElement>document.getElementById("dotOutputTA")).value = " ";
+
+
         }
     }
 
