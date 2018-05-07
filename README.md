@@ -16,8 +16,8 @@ To Save DOT File:
 ---------------------------------------
 Test Cases:
 - All Test Cases can be run against the Regex 'aab'.
-\n multipleLineMatch.txt
-\n negativeMatch.txt
-\n simpleMatch.txt
+multipleLineMatch.txt
+negativeMatch.txt
+simpleMatch.txt
 
 ---------------------------------------
