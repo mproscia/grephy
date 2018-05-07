@@ -20,7 +20,6 @@ var isUnion = false;
 var kleene = false;
 var emptyAllowed = false;
 var kleeneToken = "";
-var error = 0;
 var stringToMatch = "";
 var strings = [];
 var creatingString = false;
@@ -34,8 +33,10 @@ var startState = 0;
 var curStartState = 0;
 var curSymbol = "";
 var curStartSymbol = "";
-var acceptState = "";
+var acceptStates = [];
 var isString = false;
+var error = 0;
+
 
 
 // var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w","x", "y", "z"];
