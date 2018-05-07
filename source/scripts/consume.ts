@@ -86,8 +86,8 @@ module grephy {
         }
 
         public static reloadLog(){
-            (<HTMLInputElement>document.getElementById("logTA")).value = " ";
-            (<HTMLInputElement>document.getElementById("dotOutputTA")).value = " ";
+            (<HTMLInputElement>document.getElementById("logTA")).value = "";
+            (<HTMLInputElement>document.getElementById("dotOutputTA")).value = "";
 
 
         }

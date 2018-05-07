@@ -70,8 +70,8 @@ var grephy;
             window.location.reload();
         };
         Consume.reloadLog = function () {
-            document.getElementById("logTA").value = " ";
-            document.getElementById("dotOutputTA").value = " ";
+            document.getElementById("logTA").value = "";
+            document.getElementById("dotOutputTA").value = "";
         };
         return Consume;
     }());

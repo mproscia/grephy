@@ -6,18 +6,18 @@ module grephy{
 
             dotString += "digraph graph {";
             this.newLine();
-            dotString += "node [style=filled, color-white];";
+            dotString += "  node [style=filled, color-white];";
             this.newLine();
-            dotString += "start -> q" + startState + ";";
+            dotString += "  start -> q" + startState + ";";
             this.newLine();
 
             for(var i = 0; i < curTransitionStates.length; i++){
-                dotString += "q" + curTransitionStates[i] + " -> q" + newTransitionStates[i] + ";";
+                dotString += "  q" + curTransitionStates[i] + " -> q" + newTransitionStates[i] + ";";
                 this.newLine();
             }
 
             for(var j = 0; j < acceptStates.length; j++){
-                dotString += "q" + acceptStates[j] + " [shape = doublecircle];";
+                dotString += "  q" + acceptStates[j] + " [shape = doublecircle];";
                 this.newLine();
             }
 
