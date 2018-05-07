@@ -10,6 +10,7 @@ var textFromFileLoaded = "";
 var inputLength = 0;
 var tokenCount = 0;
 var regex;
+var acceptCount = 0;
 var curTransitionStates = [];
 var transitionSymbols = [];
 var newTransitionStates = [];

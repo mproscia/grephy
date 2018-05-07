@@ -30,6 +30,7 @@ var grephy;
                     console.log("input " + textFromFileLoaded);
                     inputLength = textFromFileLoaded.length;
                     input = textFromFileLoaded.split("\n");
+                    console.log(input);
                 };
                 fileReader.readAsText(fileToLoad, "UTF-8");
                 document.getElementById("readButton").disabled = true;
@@ -38,52 +39,24 @@ var grephy;
             //TODO: capability to read more than one line
             // seperate input based on \n and then check each index of input until you go through all of them
         };
-        // public static getRegex(){
-        //     regex = (<HTMLInputElement>document.getElementById("regexTA")).value;
-        //     console.log("regex " + regex);
-        //     if(regex != ""){
-        //         // set alphabet
-        //         for (var i = 0; i < regex.length; i ++){
-        //             if(regex.charAt(i) != "(" || regex.charAt(i) != ")" || regex.charAt(i) != "+" || regex.charAt(i) != "*"){
-        //                 acceptedAlpha.push(regex.charAt(i));
-        //             }
-        //         }
-        //     }
-        // }
-        // public static consumeRegex(){
-        //     // create regex array
-        //     var str = "";
-        //     var counter = 1;
-        //     for (var m = 0; m < regex.length; m++){
-        //         if(regex.charAt(m) == "(") {
-        //             string = true;
-        //             regexArr.push(regex.charAt(m));
-        //             while(string == true){
-        //                 if(regex.charAt(m+counter) == ")"){
-        //                     regexArr.push(str);
-        //                     regexArr.push(regex.charAt(m+counter));
-        //                     string = false;
-        //                 } else {
-        //                     str += regex.charAt(m+counter);
-        //                     counter ++;
-        //                 }
-        //             }
-        //             m += counter;
-        //         } else {
-        //             regexArr.push(regex.charAt(m));
-        //         }
-        //     }
-        //     console.log(regexArr);
-        // }
         Consume.verifyInput = function () {
             var newRegEx = new RegExp(regex);
-            var result = newRegEx.test(textFromFileLoaded);
-            if (result == true) {
-                this.putMessage("Input: " + textFromFileLoaded + " Accepted. \nOutputting DFA");
+            for (var i = 0; i < input.length; i++) {
+                var result = newRegEx.test(input[i]);
+                if (result == true) {
+                    this.putMessage("Input: " + input[i] + " Accepted.");
+                    acceptCount++;
+                }
+                else {
+                    this.putMessage("Input: " + input[i] + " NOT Accepted.");
+                }
+            }
+            if (acceptCount > 0) {
+                this.putMessage("Creating and Outputting DFA.");
                 _CreateDFA.scanRegex();
             }
             else {
-                this.putMessage("Input: " + textFromFileLoaded + " NOT Accepted. \nEnd Program.");
+                this.putMessage("No Input Acccepted. End Program");
             }
         };
         Consume.putMessage = function (msg) {
