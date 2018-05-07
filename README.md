@@ -2,8 +2,6 @@
 CMPT 440 - Formal Languages &amp; Computability Final Project
 
 ---------------------------------------
-Final Submission: FinalSubmission Branch
----------------------------------------
 
 To Search File:
 1. Upload File & Read
