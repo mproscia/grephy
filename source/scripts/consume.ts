@@ -7,23 +7,15 @@ module grephy {
         }
 
         public static consumeInput(){
-            this.verifyInput();
-            // if(matched == true){
-            //     this.consumeRegex();
-            //     this.putMessage("Input DOES Match Regex Alphabet");
-            //     (<HTMLInputElement>document.getElementById("matchButton")).disabled = true;
-            //     creatingString = true;
-            //     grephy.Match.setUpRegexString();
-            // } else {
-            //     if (acceptedAlpha.length == 0){
-            //         // do nothing bc output already printed
-            //         this.putMessage( "Regex is Empty - Try Again");
-            //     } else {
-            //         this.putMessage("Input does NOT Match Regex alphabet- Try Again");
-            //         (<HTMLInputElement>document.getElementById("matchButton")).disabled = true;
-            //         (<HTMLInputElement>document.getElementById("readButton")).disabled = false;
-            //     }
-            // }
+            regex = (<HTMLInputElement>document.getElementById("regexTA")).value;
+
+            if(regex == ""){
+                this.putMessage("Please enter a Regex and Try Again");
+            } else {
+                this.verifyInput();
+                (<HTMLInputElement>document.getElementById("matchButton")).disabled = true;
+                (<HTMLInputElement>document.getElementById("readButton")).disabled = false;
+            }
         }
 
 
@@ -40,7 +32,7 @@ module grephy {
                     textFromFileLoaded = (fileLoadedEvent.target.result).toString();
                     console.log("input " + textFromFileLoaded);
                     inputLength = textFromFileLoaded.length;
-                    input = textFromFileLoaded.split("");
+                    input = textFromFileLoaded.split("\n");
                 };
 
                 fileReader.readAsText(fileToLoad, "UTF-8");
@@ -53,78 +45,65 @@ module grephy {
 
 
             //TODO: capability to read more than one line
+            // seperate input based on \n and then check each index of input until you go through all of them
         }
 
 
-        public static getRegex(){
-            regex = (<HTMLInputElement>document.getElementById("regexTA")).value;
-            console.log("regex " + regex);
-            if(regex != ""){
-                // set alphabet
-                for (var i = 0; i < regex.length; i ++){
-                    if(regex.charAt(i) != "(" || regex.charAt(i) != ")" || regex.charAt(i) != "+" || regex.charAt(i) != "*"){
-                        acceptedAlpha.push(regex.charAt(i));
-                    }
-                }
-            }
-        }
+        // public static getRegex(){
+        //     regex = (<HTMLInputElement>document.getElementById("regexTA")).value;
+        //     console.log("regex " + regex);
+        //     if(regex != ""){
+        //         // set alphabet
+        //         for (var i = 0; i < regex.length; i ++){
+        //             if(regex.charAt(i) != "(" || regex.charAt(i) != ")" || regex.charAt(i) != "+" || regex.charAt(i) != "*"){
+        //                 acceptedAlpha.push(regex.charAt(i));
+        //             }
+        //         }
+        //     }
+        // }
 
-        public static consumeRegex(){
-            // create regex array
-            var str = "";
-            var counter = 1;
-            for (var m = 0; m < regex.length; m++){
-                if(regex.charAt(m) == "(") {
-                    string = true;
-                    regexArr.push(regex.charAt(m));
-                    while(string == true){
-                        if(regex.charAt(m+counter) == ")"){
-                            regexArr.push(str);
-                            regexArr.push(regex.charAt(m+counter));
-                            string = false;
-                        } else {
-                            str += regex.charAt(m+counter);
-                            counter ++;
-                        }
-                    }
-                    m += counter;
-                } else {
-                    regexArr.push(regex.charAt(m));
-                }
-            }
-            console.log(regexArr);
-        }
+        // public static consumeRegex(){
+        //     // create regex array
+        //     var str = "";
+        //     var counter = 1;
+        //     for (var m = 0; m < regex.length; m++){
+        //         if(regex.charAt(m) == "(") {
+        //             string = true;
+        //             regexArr.push(regex.charAt(m));
+        //             while(string == true){
+        //                 if(regex.charAt(m+counter) == ")"){
+        //                     regexArr.push(str);
+        //                     regexArr.push(regex.charAt(m+counter));
+        //                     string = false;
+        //                 } else {
+        //                     str += regex.charAt(m+counter);
+        //                     counter ++;
+        //                 }
+        //             }
+        //             m += counter;
+        //         } else {
+        //             regexArr.push(regex.charAt(m));
+        //         }
+        //     }
+        //     console.log(regexArr);
+        // }
 
 
 
 
         public static verifyInput(){
-           this.getRegex();
            var newRegEx = new RegExp(regex);
-           console.log(textFromFileLoaded);
-           console.log(newRegEx.test(textFromFileLoaded));
-
-            // check that input can match regex
-
-            for(var k = 0; k < inputLength; k++){
-                for (var l = 0; l < acceptedAlpha.length; l++){
-                    if(input[k] == acceptedAlpha[l]){
-                        matched = true;
-                    }
-                }
-            }
-
-
+           var result = newRegEx.test(textFromFileLoaded);
+           if (result == true){
+               this.putMessage("Input: " + textFromFileLoaded + " Accepted. \nOutputting DFA");
+               _CreateDFA.scanRegex();
+           } else {
+               this.putMessage("Input: " + textFromFileLoaded + " NOT Accepted. \nEnd Program.");
+           }
         }
 
         public static putMessage(msg){
             (<HTMLInputElement>document.getElementById("content-target")).value += msg + "\n";
-
-        }
-
-        public static test(){
-            var newRegEx = new RegExp(/tes/);
-            console.log(newRegEx.test("tessssssssssst"));
 
         }
 
