@@ -41,12 +41,17 @@ module grephy{
             switch(expr){
                 case "+":
                     this.increaseToken();
+                    this.consumeLastToken(regex.charAt(tokenCount));
                     break;
                 case "*":
                     if(regex.charAt(tokenCount - 1) == ")"){
                         this.declareTransition(curState, curStartSymbol, curStartState);
+                        // this.declareTransition(curStartState - 1, regex.charAt(tokenCount +1), curState + 1);
                     } else {
-                        this.declareTransition(curStartState, curStartSymbol, curStartState);
+                        this.declareTransition(curState, curStartSymbol, curState);
+                        this.declareTransition(curState, regex.charAt(tokenCount ++), nextState);
+                        // this.declareTransition(curStartState - 1, regex.charAt(tokenCount +1), curState + 1);
+
                     }
                     break;
                 case "(":
@@ -102,6 +107,10 @@ module grephy{
 
         public static consumeLastToken(expr){
             curSymbol = expr;
+            if (!isString && curSymbol != "*") {
+                curStartSymbol = curSymbol;
+                curStartState = curState;
+            }
             switch(expr){
                 case "+":
                     _Consume.putMessage("Cannot End Regex in + Token. DFA Creation Error.");
@@ -115,9 +124,9 @@ module grephy{
                         acceptStates.push(curStartState);
                         this.declareTransition(curState, curStartSymbol, curStartState);
                     } else {
-                        this.declareTransition(curStartState, curStartSymbol, curStartState);
-                        acceptStates.push(curStartState);
-                        acceptStates.push(curStartState -1);
+                        this.declareTransition(curState, curStartSymbol, curState);
+                        acceptStates.push(curState -1 );
+                        acceptStates.push(curState -2);
                     }
                     this.endProgram();
                     break;
@@ -194,13 +203,18 @@ module grephy{
         }
 
         public static endProgram(){
-            this.increaseToken();
-            _Consume.putMessage("DFA Creation Complete with " + error + " errors.");
-            if (error > 0){
-                _Consume.putMessage("DFA Not Displayed Due to Errors");
+            if(tokenCount < regex.length-1){
+                this.increaseToken();
             } else {
-                CreateDFAFile.createOutput();
+                this.increaseToken();
+                _Consume.putMessage("DFA Creation Complete with " + error + " errors.");
+                if (error > 0){
+                    _Consume.putMessage("DFA Not Displayed Due to Errors");
+                } else {
+                    CreateDFAFile.createOutput();
+                }
             }
+
         }
 
     }
