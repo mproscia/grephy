@@ -1,7 +1,3 @@
-var onDocumentLoad = function () {
-    grephy.Consume.init();
-    // hello
-};
 var _Consume = grephy.Consume;
 var _CreateDFA = grephy.CreateDFA;
 var msg = "";

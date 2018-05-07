@@ -7,7 +7,7 @@ var grephy;
             dotString = "";
             dotString += "digraph graph {";
             this.newLine();
-            dotString += "  node [style=filled, color-white];";
+            dotString += "  node [style=filled, color=white];";
             this.newLine();
             dotString += "  start -> q" + startState + ";";
             this.newLine();
@@ -16,7 +16,7 @@ var grephy;
                 this.newLine();
             }
             for (var j = 0; j < acceptStates.length; j++) {
-                dotString += "  q" + acceptStates[j] + " [shape = doublecircle];";
+                dotString += "  q" + acceptStates[j] + " [shape=doublecircle];";
                 this.newLine();
             }
             dotString += "}";
@@ -36,8 +36,6 @@ var grephy;
             document.body.appendChild(anchorElem);
             anchorElem.click();
             document.body.removeChild(anchorElem);
-            // On Edge, revokeObjectURL should be called only after
-            // a.click() has completed, atleast on EdgeHTML 15.15048
             setTimeout(function () {
                 window.URL.revokeObjectURL(url);
             }, 1000);

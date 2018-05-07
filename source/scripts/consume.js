@@ -3,9 +3,6 @@ var grephy;
     var Consume = /** @class */ (function () {
         function Consume() {
         }
-        Consume.init = function () {
-            // clear everything & all variables
-        };
         Consume.consumeInput = function () {
             regex = document.getElementById("regexTA").value;
             acceptCount = 0;
@@ -26,6 +23,7 @@ var grephy;
             }
             else {
                 this.putMessage("File Load Success");
+                // load contents from file
                 var fileReader = new FileReader();
                 fileReader.onload = function (fileLoadedEvent) {
                     textFromFileLoaded = (fileLoadedEvent.target.result).toString();
@@ -35,11 +33,10 @@ var grephy;
                     console.log(input);
                 };
                 fileReader.readAsText(fileToLoad, "UTF-8");
+                // only allow matching once file is loaded - avoids conflict 
                 document.getElementById("readButton").disabled = true;
                 document.getElementById("matchButton").disabled = false;
             }
-            //TODO: capability to read more than one line
-            // seperate input based on \n and then check each index of input until you go through all of them
         };
         Consume.verifyInput = function () {
             var newRegEx = new RegExp(regex);
@@ -58,14 +55,14 @@ var grephy;
                 _CreateDFA.scanRegex();
             }
             else {
-                this.putMessage("No Input Acccepted. End Program");
+                this.putMessage("No Input Accepted. End Program");
             }
         };
         Consume.putMessage = function (msg) {
             document.getElementById("logTA").value += msg + "\n";
         };
         Consume.reload = function () {
-            msg = " ";
+            msg = "";
             document.getElementById("logTA").value = msg;
             window.location.reload();
         };

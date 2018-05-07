@@ -2,10 +2,6 @@ module grephy {
 
     export class Consume{
 
-        public static init(){
-            // clear everything & all variables
-        }
-
         public static consumeInput(){
             regex = (<HTMLInputElement>document.getElementById("regexTA")).value;
             acceptCount = 0;
@@ -29,6 +25,7 @@ module grephy {
             } else {
                 this.putMessage("File Load Success");
 
+                // load contents from file
                 var fileReader = new FileReader();
                 fileReader.onload = function(fileLoadedEvent){
                     textFromFileLoaded = (fileLoadedEvent.target.result).toString();
@@ -39,16 +36,11 @@ module grephy {
                 };
 
                 fileReader.readAsText(fileToLoad, "UTF-8");
+
+                // only allow matching once file is loaded - avoids conflict
                 (<HTMLInputElement>document.getElementById("readButton")).disabled = true;
                 (<HTMLInputElement>document.getElementById("matchButton")).disabled = false;
-
-
             }
-
-
-
-            //TODO: capability to read more than one line
-            // seperate input based on \n and then check each index of input until you go through all of them
         }
 
 
@@ -70,7 +62,7 @@ module grephy {
                this.putMessage("Creating and Outputting DFA.");
                _CreateDFA.scanRegex();
            } else {
-               this.putMessage("No Input Acccepted. End Program");
+               this.putMessage("No Input Accepted. End Program");
            }
         }
 
@@ -80,7 +72,7 @@ module grephy {
         }
 
         public static reload(){
-            msg = " ";
+            msg = "";
             (<HTMLInputElement>document.getElementById("logTA")).value = msg;
             window.location.reload();
         }

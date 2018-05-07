@@ -27,10 +27,6 @@ var grephy;
                     this.consumeToken(regex.charAt(tokenCount));
                 }
             }
-            console.log(curTransitionStates);
-            console.log(transitionSymbols);
-            console.log(newTransitionStates);
-            console.log(acceptStates);
         };
         CreateDFA.consumeToken = function (expr) {
             curSymbol = expr;
@@ -46,12 +42,10 @@ var grephy;
                 case "*":
                     if (regex.charAt(tokenCount - 1) == ")") {
                         this.declareTransition(curState, curStartSymbol, curStartState);
-                        // this.declareTransition(curStartState - 1, regex.charAt(tokenCount +1), curState + 1);
                     }
                     else {
                         this.declareTransition(curState, curStartSymbol, curState);
                         this.declareTransition(curState, regex.charAt(tokenCount++), nextState);
-                        // this.declareTransition(curStartState - 1, regex.charAt(tokenCount +1), curState + 1);
                     }
                     break;
                 case "(":
