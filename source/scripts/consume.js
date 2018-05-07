@@ -33,7 +33,7 @@ var grephy;
                     console.log(input);
                 };
                 fileReader.readAsText(fileToLoad, "UTF-8");
-                // only allow matching once file is loaded - avoids conflict 
+                // only allow matching once file is loaded - avoids conflict
                 document.getElementById("readButton").disabled = true;
                 document.getElementById("matchButton").disabled = false;
             }

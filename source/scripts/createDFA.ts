@@ -22,6 +22,7 @@ module grephy{
                 if(tokenCount == regex.length -1 ){
                     this.consumeLastToken(regex.charAt(tokenCount));
                 } else {
+                    // this.lookAhead(regex.charAt(tokenCount));
                     this.consumeToken(regex.charAt(tokenCount));
                 }
             }
@@ -194,6 +195,16 @@ module grephy{
             this.increaseToken();
             this.increaseState();
         }
+
+        // Used for Union - Have to go back to
+        // public static lookAhead(expr){
+        //     if(regex.charAt(tokenCount ++) == "+"){
+        //         this.consumeLastToken(expr);
+        //         this.increaseToken()
+        //     } else {
+        //         this.consumeToken(expr);
+        //     }
+        // }
 
         public static endProgram(){
             if(tokenCount < regex.length-1){
