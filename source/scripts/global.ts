@@ -7,6 +7,7 @@ var _Consume = grephy.Consume;
 var _Match = grephy.Match;
 var msg = "";
 var matched = false;
+var doneMatching = false;
 var input = [];
 var textFromFileLoaded = "";
 var inputLength = 0;
