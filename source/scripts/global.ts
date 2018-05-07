@@ -33,4 +33,5 @@ var acceptStates = [];
 var isString = false;
 var error = 0;
 
+var dotString = "";
 
