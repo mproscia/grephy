@@ -5,9 +5,8 @@ var grephy;
         }
         Match.init = function () {
             // reset matching variables
-            input = [];
         };
-        Match.matchTokens = function () {
+        Match.findMatches = function () {
         };
         return Match;
     }());

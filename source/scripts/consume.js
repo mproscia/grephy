@@ -9,16 +9,18 @@ var grephy;
         Consume.consumeInput = function () {
             this.verifyInput();
             if (matched == true) {
+                this.consumeRegex();
+                this.putMessage("Input DOES Match Regex Alphabet");
                 document.getElementById("matchButton").disabled = true;
-                grephy.Match.matchTokens();
+                grephy.Match.findMatches();
             }
             else {
-                if (acceptedChar.length == 0) {
+                if (acceptedAlpha.length == 0) {
                     // do nothing bc output already printed
-                    document.getElementById("content-target").value = "Regex is Empty - Try Again";
+                    this.putMessage("Regex is Empty - Try Again");
                 }
                 else {
-                    document.getElementById("content-target").value = "Input does NOT Match Regex - Try Again";
+                    this.putMessage("Input does NOT Match Regex alphabet- Try Again");
                     document.getElementById("matchButton").disabled = true;
                     document.getElementById("readButton").disabled = false;
                 }
@@ -28,41 +30,65 @@ var grephy;
             this.getRegex();
             // check that input can match regex
             for (var k = 0; k < inputLength; k++) {
-                for (var l = 0; l < acceptedChar.length; l++) {
-                    if (input[k] == acceptedChar[l]) {
+                for (var l = 0; l < acceptedAlpha.length; l++) {
+                    if (input[k] == acceptedAlpha[l]) {
                         matched = true;
-                        console.log("match");
                     }
                 }
             }
         };
         Consume.getRegex = function () {
-            var regex = document.getElementById("regexTA").value;
+            regex = document.getElementById("regexTA").value;
             if (regex != "") {
-                // get rid of special characters for terms of matching
+                // set alphabet
                 for (var i = 0; i < regex.length; i++) {
                     for (var j = 0; j < alphabet.length; j++) {
                         if (regex.charAt(i) == alphabet[j]) {
-                            acceptedChar.push(regex.charAt(i));
+                            acceptedAlpha.push(regex.charAt(i));
                         }
                     }
                 }
             }
-            console.log("accept" + acceptedChar);
+        };
+        Consume.consumeRegex = function () {
+            // create regex array
+            var str = "";
+            var counter = 1;
+            for (var m = 0; m < regex.length; m++) {
+                if (regex.charAt(m) == "(") {
+                    string = true;
+                    regexArr.push(regex.charAt(m));
+                    while (string == true) {
+                        if (regex.charAt(m + counter) == ")") {
+                            regexArr.push(str);
+                            regexArr.push(regex.charAt(m + counter));
+                            string = false;
+                        }
+                        else {
+                            str += regex.charAt(m + counter);
+                            counter++;
+                        }
+                    }
+                    m += counter;
+                }
+                else {
+                    regexArr.push(regex.charAt(m));
+                }
+            }
+            console.log(regexArr);
         };
         Consume.readFile = function () {
             var fileToLoad = document.getElementById("fileToLoad").files[0];
             if (fileToLoad == null) {
-                document.getElementById("content-target").value = "File Load Failed - Try Again.";
+                this.putMessage("File Load Failed - Try Again.");
             }
             else {
-                document.getElementById("content-target").value = " ";
+                this.putMessage("File Load Success");
                 var fileReader = new FileReader();
                 fileReader.onload = function (fileLoadedEvent) {
                     textFromFileLoaded = (fileLoadedEvent.target.result).toString();
                     inputLength = textFromFileLoaded.length;
                     input = textFromFileLoaded.split("");
-                    console.log("input" + input);
                 };
                 fileReader.readAsText(fileToLoad, "UTF-8");
                 document.getElementById("readButton").disabled = true;
@@ -71,7 +97,12 @@ var grephy;
             //TODO: capability to read more than one line
         };
         Consume.reload = function () {
+            msg = " ";
+            document.getElementById("content-target").value = msg;
             window.location.reload();
+        };
+        Consume.putMessage = function (msg) {
+            document.getElementById("content-target").value += msg + "\n";
         };
         return Consume;
     }());

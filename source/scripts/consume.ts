@@ -9,14 +9,16 @@ module grephy {
         public static consumeInput(){
             this.verifyInput();
             if(matched == true){
+                this.consumeRegex();
+                this.putMessage("Input DOES Match Regex Alphabet");
                 (<HTMLInputElement>document.getElementById("matchButton")).disabled = true;
-                grephy.Match.matchTokens();
+                grephy.Match.findMatches();
             } else {
-                if (acceptedChar.length == 0){
+                if (acceptedAlpha.length == 0){
                     // do nothing bc output already printed
-                    (<HTMLInputElement>document.getElementById("content-target")).value = "Regex is Empty - Try Again";
+                    this.putMessage( "Regex is Empty - Try Again");
                 } else {
-                    (<HTMLInputElement>document.getElementById("content-target")).value = "Input does NOT Match Regex - Try Again";
+                    this.putMessage("Input does NOT Match Regex alphabet- Try Again");
                     (<HTMLInputElement>document.getElementById("matchButton")).disabled = true;
                     (<HTMLInputElement>document.getElementById("readButton")).disabled = false;
                 }
@@ -29,48 +31,67 @@ module grephy {
             // check that input can match regex
 
             for(var k = 0; k < inputLength; k++){
-                for (var l = 0; l < acceptedChar.length; l++){
-                    if(input[k] == acceptedChar[l]){
+                for (var l = 0; l < acceptedAlpha.length; l++){
+                    if(input[k] == acceptedAlpha[l]){
                         matched = true;
-                        console.log("match");
                     }
                 }
             }
         }
 
         public static getRegex(){
-            var regex = (<HTMLInputElement>document.getElementById("regexTA")).value;
+            regex = (<HTMLInputElement>document.getElementById("regexTA")).value;
             if(regex != ""){
-                // get rid of special characters for terms of matching
+                // set alphabet
                 for (var i = 0; i < regex.length; i ++){
                     for (var j = 0; j < alphabet.length; j++){
                         if (regex.charAt(i) == alphabet[j]){
-                            acceptedChar.push(regex.charAt(i));
+                            acceptedAlpha.push(regex.charAt(i));
                         }
                     }
                 }
             }
+        }
 
-
-
-            console.log("accept" + acceptedChar);
-
+        public static consumeRegex(){
+            // create regex array
+            var str = "";
+            var counter = 1;
+            for (var m = 0; m < regex.length; m++){
+                if(regex.charAt(m) == "(") {
+                    string = true;
+                    regexArr.push(regex.charAt(m));
+                    while(string == true){
+                        if(regex.charAt(m+counter) == ")"){
+                            regexArr.push(str);
+                            regexArr.push(regex.charAt(m+counter));
+                            string = false;
+                        } else {
+                            str += regex.charAt(m+counter);
+                            counter ++;
+                        }
+                    }
+                    m += counter;
+                } else {
+                    regexArr.push(regex.charAt(m));
+                }
+            }
+            console.log(regexArr);
         }
 
         public static readFile(){
             var fileToLoad = (<HTMLInputElement>document.getElementById("fileToLoad")).files[0];
             if(fileToLoad == null){
-                (<HTMLInputElement>document.getElementById("content-target")).value = "File Load Failed - Try Again.";
+                this.putMessage("File Load Failed - Try Again.");
 
             } else {
-                (<HTMLInputElement>document.getElementById("content-target")).value = " ";
+                this.putMessage("File Load Success");
 
                 var fileReader = new FileReader();
                 fileReader.onload = function(fileLoadedEvent){
                     textFromFileLoaded = (fileLoadedEvent.target.result).toString();
                     inputLength = textFromFileLoaded.length;
                     input = textFromFileLoaded.split("");
-                    console.log("input" + input);
                 };
 
                 fileReader.readAsText(fileToLoad, "UTF-8");
@@ -87,7 +108,14 @@ module grephy {
 
 
         public static reload(){
+            msg = " ";
+            (<HTMLInputElement>document.getElementById("content-target")).value = msg;
             window.location.reload();
+        }
+
+        public static putMessage(msg){
+            (<HTMLInputElement>document.getElementById("content-target")).value += msg + "\n";
+
         }
 
 
